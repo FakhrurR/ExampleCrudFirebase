@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">ExampleFirebase</string>
+    <string name="nama">Nama</string>
+    <string name="nomor_telpon_handphone">Nomor Telpon/Handphone</string>
+    <string name="alamat">Alamat</string>
+    <string name="asal_kampus">Asal Kampus</string>
+    <string name="simpan">Simpan</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="clear">Clear</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+</resources>
