@@ -7,16 +7,25 @@ public class Biodata {
     private String alamat;
     private String kampus;
     private String key;
+    private String url;
 
-
-    public Biodata(String nama, String notelp, String alamat, String kampus) {
+    public Biodata(String nama, String notelp, String alamat, String kampus, String url) {
         this.nama = nama;
         this.notelp = notelp;
         this.alamat = alamat;
         this.kampus = kampus;
+        this.url = url;
     }
 
     public Biodata() {
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public String getKey() {
@@ -62,6 +71,6 @@ public class Biodata {
     @Override
     public String toString() {
         return " " + nama + "\n" + " " + notelp + "\n" + " " + alamat + "\n"
-                + " " + kampus;
+                + " " + kampus + "\n" + " " + url;
     }
 }

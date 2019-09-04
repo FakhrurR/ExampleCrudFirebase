@@ -5,11 +5,14 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.ngandroidaja.examplefirebase.R;
 import com.ngandroidaja.examplefirebase.UpdateDelActivity;
 import com.ngandroidaja.examplefirebase.model.Biodata;
@@ -40,6 +43,13 @@ public class BioAdapter extends RecyclerView.Adapter<BioAdapter.ViewHolder> {
         holder.EdtNama.setText(bio.getNama());
         holder.EdtKampus.setText(bio.getNotelp());
 
+        Glide.with(context)
+                .asBitmap()
+                .load(bio.getUrl())
+                .apply(new RequestOptions().override(100, 100))
+                .error(R.mipmap.ic_launcher)
+                .into(holder.imageViewUrl);
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -49,6 +59,7 @@ public class BioAdapter extends RecyclerView.Adapter<BioAdapter.ViewHolder> {
                 BioDetail.putExtra("notelp", bio.getNotelp());
                 BioDetail.putExtra("alamat", bio.getAlamat());
                 BioDetail.putExtra("kampus", bio.getKampus());
+                BioDetail.putExtra("url", bio.getUrl());
 
                 context.startActivity(BioDetail);
             }
@@ -66,12 +77,14 @@ public class BioAdapter extends RecyclerView.Adapter<BioAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView EdtNama, EdtKampus;
+        private ImageView imageViewUrl;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
             EdtNama = itemView.findViewById(R.id.show_nama);
             EdtKampus = itemView.findViewById(R.id.show_kampus);
+            imageViewUrl = itemView.findViewById(R.id.image_url);
         }
     }
 }

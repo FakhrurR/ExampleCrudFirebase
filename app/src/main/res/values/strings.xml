@@ -10,4 +10,7 @@
     <string name="clear">Clear</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
+    <string name="choose_image">Choose Image</string>
+    <string name="image_name">Image Name</string>
+    <string name="upload_image">Upload Image</string>
 </resources>
