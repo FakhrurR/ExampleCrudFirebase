@@ -59,6 +59,8 @@ public class UpdateDelActivity extends AppCompatActivity {
 
     private String id, name, notelp, alamat, kampus, urigambar;
 
+    private Button btnEdit, btnUpload, btnChoose, btnDelete;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,7 +94,7 @@ public class UpdateDelActivity extends AppCompatActivity {
 
         textViewImage.setVisibility(View.INVISIBLE);
 
-        Button btnEdit = findViewById(R.id.btn_edit);
+        btnEdit = findViewById(R.id.btn_edit);
         btnEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -122,24 +124,25 @@ public class UpdateDelActivity extends AppCompatActivity {
             }
         });
 
-        Button BtnChoose = findViewById(R.id.btn_choose);
-        BtnChoose.setOnClickListener(new View.OnClickListener() {
+        btnChoose = findViewById(R.id.btn_choose);
+        btnChoose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FileChooser();
+                btnUpload.setEnabled(true);
             }
         });
 
-        Button btnDel = findViewById(R.id.btn_delete);
-        btnDel.setOnClickListener(new View.OnClickListener() {
+        btnDelete = findViewById(R.id.btn_delete);
+        btnDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 showDialog();
             }
         });
 
-        Button BtnUpload = findViewById(R.id.btn_upload);
-        BtnUpload.setOnClickListener(new View.OnClickListener() {
+        btnUpload = findViewById(R.id.btn_upload);
+        btnUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 progressDialog = ProgressDialog.show(UpdateDelActivity.this,
@@ -212,7 +215,15 @@ public class UpdateDelActivity extends AppCompatActivity {
             @Override
             public void onSuccess(Void aVoid) {
                 Snackbar.make(findViewById(R.id.btn_edit), "Data Berhasil DiDelete", Snackbar.LENGTH_LONG).show();
+            }
+        });
 
+        StorageReference delStorage = storageReference.getStorage().getReferenceFromUrl(imageId);
+
+        delStorage.delete().addOnSuccessListener(new OnSuccessListener<Void>() {
+            @Override
+            public void onSuccess(Void aVoid) {
+                Toast.makeText(UpdateDelActivity.this, "Gambar Berhasil Delete", Toast.LENGTH_SHORT).show();
             }
         });
     }

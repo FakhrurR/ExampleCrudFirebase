@@ -62,6 +62,8 @@ public class AddData extends AppCompatActivity {
     private Uri imageUri;
     private ProgressDialog progressDialog;
 
+    private Button btnSave, btnUpload, btnChoose, btnClear;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,16 +81,17 @@ public class AddData extends AppCompatActivity {
         storageReference = FirebaseStorage.getInstance().getReference("Image");
 
 
-        Button BtnChoose = findViewById(R.id.btn_choose);
-        BtnChoose.setOnClickListener(new View.OnClickListener() {
+        btnChoose = findViewById(R.id.btn_choose);
+        btnChoose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 FileChooser();
+                btnUpload.setEnabled(true);
             }
         });
 
-        Button BtnSave = findViewById(R.id.btn_save);
-        BtnSave.setOnClickListener(new View.OnClickListener() {
+        btnSave = findViewById(R.id.btn_save);
+        btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (isEmpty(nama) && isEmpty(notelp) && isEmpty(alamat) && isEmpty(kampus) && isEmpty(urigambar)) {
@@ -113,20 +116,23 @@ public class AddData extends AppCompatActivity {
                             nama.toLowerCase(), notelp.toLowerCase(), alamat.toLowerCase()
                             , kampus.toLowerCase(), urigambar));
 
+                    Intent intent = new Intent(AddData.this, MainActivity.class);
+                    startActivity(intent);
+
                 }
             }
         });
 
-        Button BtnClear = findViewById(R.id.btn_clear);
-        BtnClear.setOnClickListener(new View.OnClickListener() {
+        btnClear = findViewById(R.id.btn_clear);
+        btnClear.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 clearData();
             }
         });
 
-        Button BtnUpload = findViewById(R.id.btn_upload);
-        BtnUpload.setOnClickListener(new View.OnClickListener() {
+        btnUpload = findViewById(R.id.btn_upload);
+        btnUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 progressDialog = ProgressDialog.show(AddData.this,
@@ -135,6 +141,7 @@ public class AddData extends AppCompatActivity {
                         , false);
 
                 uploadFile();
+                btnSave.setEnabled(true);
             }
         });
     }
